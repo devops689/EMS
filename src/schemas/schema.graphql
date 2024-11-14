@@ -1,0 +1,33 @@
+type Employee {
+  id: ID!
+  name: String!
+  age: Int!
+  class: String!
+  subjects: [String]!
+  attendance: Int!
+  role: String!
+}
+
+type Query {
+  listEmployees(page: Int, limit: Int, sortField: String, sortOrder: String): [Employee]
+  getEmployee(id: Int!): Employee
+}
+
+type Mutation {
+  addEmployee(name: String!, age: Int!, class: String!, subjects: [String]!, role: String!, password: String!): Employee
+  updateEmployee(id: ID!, name: String, age: Int, class: String, subjects: [String], attendance: Int): Employee
+}
+
+type AuthPayload {
+  token: String
+  employee: Employee
+}
+
+type Mutation {
+  login(name: String!, password: String!): AuthPayload
+}
+
+schema {
+  query: Query
+  mutation: Mutation
+}
